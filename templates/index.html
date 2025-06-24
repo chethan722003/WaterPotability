@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💧 Water Potability Predictor</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Animate.css for animations -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #cceeff, #e0f7fa);
+      font-family: 'Segoe UI', sans-serif;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center px-4">
+
+  <div class="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md animate__animated animate__fadeIn">
+    <h2 class="text-2xl font-bold text-center text-blue-700 mb-6">💧 Water Potability Predictor</h2>
+
+    <form method="POST" class="space-y-4">
+      {% set units = {
+        "ph": "0-14",
+        "hardness": "mg/L",
+        "solids": "ppm",
+        "chloramines": "mg/L",
+        "sulfate": "mg/L",
+        "conductivity": "μS/cm",
+        "organic_carbon": "mg/L",
+        "trihalomethanes": "μg/L",
+        "turbidity": "NTU"
+      } %}
+
+      {% for label, name in [
+        ("pH", "ph"),
+        ("Hardness", "hardness"),
+        ("Solids", "solids"),
+        ("Chloramines", "chloramines"),
+        ("Sulfate", "sulfate"),
+        ("Conductivity", "conductivity"),
+        ("Organic Carbon", "organic_carbon"),
+        ("Trihalomethanes", "trihalomethanes"),
+        ("Turbidity", "turbidity")
+      ] %}
+        <div>
+          <label class="block font-semibold text-gray-700">{{ label }} 
+            <span class="text-sm text-gray-500">({{ units[name] }})</span>
+          </label>
+          <input type="number" step="any" name="{{ name }}" required
+            value="{{ request.form.get(name, '') }}"
+            class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+        </div>
+      {% endfor %}
+
+      <button type="submit"
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-semibold transition duration-200">
+        🔍 Predict Potability
+      </button>
+    </form>
+
+    {% if prediction %}
+      <div class="mt-6 text-center text-lg font-bold text-green-700 animate__animated animate__fadeInUp">
+        {{ prediction }}
+      </div>
+    {% endif %}
+  </div>
+
+</body>
+</html>

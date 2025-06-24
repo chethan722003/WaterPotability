@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Batch Prediction - Water Potability</title>
+</head>
+<body style="font-family: Arial; text-align: center; padding: 30px;">
+    <h2>📁 Upload CSV for Batch Potability Prediction</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="csv_file" accept=".csv" required><br><br>
+        <button type="submit">Upload and Predict</button>
+    </form>
+    <p><b>Required columns in CSV:</b> ph, Hardness, Solids, Chloramines, Sulfate, Conductivity, Organic_carbon, Trihalomethanes, Turbidity</p>
+</body>
+</html>
