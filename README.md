@@ -34,6 +34,7 @@ https://www.kaggle.com/datasets/uom190346a/water-quality-and-potability
 
 ### 💻 Run Locally
 
+
 ```bash
 git clone https://github.com/chethan722003/WaterPotability.git
 cd WaterPotability
